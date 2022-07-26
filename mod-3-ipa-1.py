@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[93]:
 
 
 '''Module 3: Individual Programming Assignment 1
@@ -45,9 +45,9 @@ def shift_letter(letter, shift):
         #if chr goes past 90 (i.e goes past Z), reset and subtract 26 to return to A
         if order_letter > 90:
             order_letter -= 26
-            return (chr(order_letter))
+            return str(chr(order_letter))
         else:
-            return (chr(order_letter))
+            return str(chr(order_letter))
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher. 
@@ -74,7 +74,7 @@ def caesar_cipher(message, shift):
             cipher.append(" ")
         else:
             order_letter = ord(x) + int(shift)
-            if ((order_letter > 90) and (ord(x) < 97)) or (order_letter > 122): #check for small letter cases
+            if ((order_letter > 90)):
                 order_letter -= 26
                 cipher.append(chr(order_letter))
             else:
@@ -111,7 +111,7 @@ def shift_by_letter(letter, letter_shift):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     #same process as shift_letter. subtract order of letter_shift by 65 to get desired results
     if letter == " ":
-        print (" ")
+        return (" ")
     else:
         order_letter = ord(letter.capitalize()) + ord(letter_shift) - 65
         if order_letter > 90:
@@ -149,20 +149,31 @@ def vigenere_cipher(message, key):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     cipher = []
     key_list = list(key) #initialize key as list
-    key_count = 0 
+    key_count = 0
+    if len(message) < len(key):
+        while len(message) < len(key):
+            message+= message
+        if len(message) > len(key):
+            message = message[:-(len(message)-len(key))]
     for x in message: #iterate over all characters of message, and all characters of key
         if x == " ":
             cipher.append(" ")
             key_count +=1
+            if key_count == len(key_list):
+                key_count = 0
         else:
             order_letter = ord(x) + ord(key_list[key_count]) - 65 
-            if ((order_letter > 90) and (ord(x) < 97)) or (order_letter > 122): 
+            if order_letter > 90: 
                 order_letter -= 26
                 cipher.append(chr(order_letter))
                 key_count +=1 
+                if key_count == len(key_list):
+                    key_count = 0
             else:
                 cipher.append(chr(order_letter))
                 key_count+=1
+                if key_count == len(key_list):
+                    key_count = 0
     cipher_string = ""
     for y in cipher:
         cipher_string += y

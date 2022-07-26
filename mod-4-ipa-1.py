@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[25]:
 
 
 #sample data
@@ -61,7 +61,7 @@ board3 = [
 ]
 
 board4 = [
-['X','X','X'],
+['X','','X'],
 ['O','X','O'],
 ['O','','O'],
 ]
@@ -109,7 +109,7 @@ legs1 = {
 }
 
 
-# In[ ]:
+# In[26]:
 
 
 '''Module 4: Individual Programming Assignment 1
@@ -147,7 +147,7 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    status = "No relationship"
+    status = "no relationship"
     following = False
     followedby = False
     try: #try if from_member exists
@@ -163,11 +163,11 @@ def relationship_status(from_member, to_member, social_graph):
             status = "Following"
     #outcomes
     if following == True and followedby == True:
-        status = "Friends"
+        status = "friends"
     elif following == True and followedby == False:
-        status = "Following"
+        status = "follower"
     elif following == False and followedby == True:
-        status = "Followed by"
+        status = "followed by"
     return status
 
 
@@ -206,13 +206,22 @@ def tic_tac_toe(board):
         hor_set = set(board[i])
         vert_set = set(vert[i])
         #check if tic tac toe is achieved (only one unique element)
-        if len(hor_set)== 1 or len(vert_set) == 1 or len(diagonalup_set) == 1 or len(diagonaldown_set) == 1 :
-            status = True
-            #stop loop
-            i = len(board)
+        if len(hor_set)== 1:
+            for j in hor_set:
+                i = len(board)
+                return j
+        if len(vert_set) == 1:
+            for j in vert_set:
+                return j
+        if len(diagonalup_set) == 1:
+            for j in diagonalup_set:
+                return j
+        if len(diagonaldown_set) == 1:
+            for j in diagonaldown_set:
+                return j
         else:
             i+=1
-    return status
+    return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
@@ -261,6 +270,25 @@ def eta(first_stop, second_stop, route_map):
             else: 
                 i +=1 
     return total
+
+
+# In[32]:
+
+
+tic_tac_toe(board7)
+
+
+# In[14]:
+
+
+for i in burger:
+    j = i
+
+
+# In[15]:
+
+
+j
 
 
 # In[ ]:
